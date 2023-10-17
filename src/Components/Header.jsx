@@ -29,6 +29,16 @@ const Header = () => {
       <li>
         <NavLink to={"/orders"}>Orders</NavLink>
       </li>
+      {user && (
+        <>
+          <li>
+            <NavLink to={"/profile"}>Profile</NavLink>
+          </li>
+          <li>
+            <NavLink to={"/dashboard"}>Dashboard</NavLink>
+          </li>
+        </>
+      )}
     </>
   );
 
@@ -43,9 +53,9 @@ const Header = () => {
             {navLink}
           </ul>
         </div>
-        <a className="btn btn-ghost normal-case text-xl">
+        <Link to={"/"} className="btn btn-ghost normal-case text-xl">
           Context-Firebase-Router
-        </a>
+        </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">{navLink}</ul>

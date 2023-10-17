@@ -1,9 +1,10 @@
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Providers/AuthProvider";
 
 const Register = () => {
   const { createUser } = useContext(AuthContext);
+  const nevigate = useNavigate();
 
   const handleRegister = (e) => {
     e.preventDefault();
@@ -15,6 +16,8 @@ const Register = () => {
     createUser(email, password)
       .then((result) => {
         console.log(result.user);
+        e.target.reset();
+        nevigate("/login");
       })
       .catch((error) => {
         console.error(error.message);
@@ -70,7 +73,7 @@ const Register = () => {
               </label>
             </div>
             <div className="form-control mt-6">
-              <button className="btn btn-primary">Login</button>
+              <button className="btn btn-primary">Register</button>
             </div>
             <p>
               Have an account? <Link to={"/login"}>Login here</Link>
