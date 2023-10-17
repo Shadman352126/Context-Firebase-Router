@@ -7,8 +7,8 @@ const Header = () => {
   const handleSignOut = () => {
     console.log("obseving signout");
     logOut()
-      .then((result) => {
-        console.log(result.user);
+      .then(() => {
+        console.log("User logged out successfully");
       })
       .catch((error) => {
         console.error(error.message);
@@ -25,6 +25,9 @@ const Header = () => {
       </li>
       <li>
         <NavLink to={"/register"}>Register</NavLink>
+      </li>
+      <li>
+        <NavLink to={"/orders"}>Orders</NavLink>
       </li>
     </>
   );
