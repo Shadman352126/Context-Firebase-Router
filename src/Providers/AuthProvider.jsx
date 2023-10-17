@@ -1,10 +1,30 @@
-import { createContext } from "react";
+import { createContext, useEffect, useState } from "react";
 import PropTypes from "prop-types";
+import auth from "../Firebase/firebase.init";
+import {
+  createUserWithEmailAndPassword,
+  onAuthStateChanged,
+} from "firebase/auth";
 
 export const AuthContext = createContext(null); //only export kobo not default because from one file only one default can be exported
 
 const AuthProvider = ({ children }) => {
-  const authInfo = { name: "Shadman Shahariar" };
+  const [user, setUser] = useState(null);
+
+  const createUser = (email, password) => {
+    return createUserWithEmailAndPassword(auth, email, password);
+  };
+
+  useEffect(() => {
+    const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+    });
+    return () => {
+      unSubscribe();
+    };
+  }, []);
+
+  const authInfo = { user, createUser };
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
   );
